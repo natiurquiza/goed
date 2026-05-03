@@ -293,7 +293,38 @@ async function buscar() {
     const titulo = r.c[4]?.v;
     const link = r.c[5]?.v;
 
-    const prompt = `Adaptá este proyecto: ${titulo}`;
+    const prompt = `
+Sos un especialista en educación digital del Ministerio de Educación de CABA.
+
+Necesito que adaptes el siguiente proyecto pedagógico:
+
+📘 Proyecto: ${titulo}
+📍 Grado: ${g}
+🏫 Modalidad: ${m}
+📚 Área: ${a}
+
+🎯 Tu tarea:
+Rediseñar el proyecto para que sea aplicable en el aula, incorporando el Plan de Bialfabetización Digital.
+
+📌 Incluir:
+
+1. Objetivos claros de aprendizaje
+2. Secuencia de actividades paso a paso
+3. Integración de tecnología con sentido pedagógico
+4. Estrategias de inclusión (especialmente si es modalidad especial)
+5. Propuestas de evaluación formativa
+
+📌 Asegurate de integrar al menos uno de estos ejes:
+- Alfabetizaciones múltiples
+- Ciudadanía digital
+- Pensamiento computacional
+
+📌 Importante:
+- Usar lenguaje claro y docente
+- Evitar generalidades
+- Proponer actividades concretas listas para implementar
+
+`;
 
     html += `
       <div class="resultado-card">
