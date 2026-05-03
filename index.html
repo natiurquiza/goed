@@ -39,7 +39,6 @@ body {
   text-align: center;
 }
 
-/* TITULO */
 h1 {
   font-size: 34px;
 }
@@ -49,7 +48,6 @@ h1 {
   margin-bottom: 35px;
 }
 
-/* TARJETAS */
 .cards {
   display: flex;
   gap: 20px;
@@ -81,7 +79,6 @@ h1 {
   background: #fff0f6;
 }
 
-/* FORM */
 .form {
   display: flex;
   gap: 15px;
@@ -95,7 +92,6 @@ select {
   border: 2px solid #4FD1C5;
 }
 
-/* BOTÓN BUSCAR */
 .buscar {
   background: #ff4fa3;
   color: white;
@@ -107,7 +103,6 @@ select {
   cursor: pointer;
 }
 
-/* RESULTADOS */
 .resultado-card {
   margin-top: 20px;
   padding: 20px;
@@ -122,7 +117,6 @@ select {
   margin-bottom: 12px;
 }
 
-/* BOTONES RESULTADO */
 .botones {
   display: flex;
   gap: 12px;
@@ -146,7 +140,6 @@ select {
   cursor: pointer;
 }
 
-/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -234,6 +227,10 @@ select {
 
 </div>
 
+<!-- 🔥 SOLO ESTO AGREGADO -->
+<button class="buscar" onclick="buscar()">Buscar proyectos</button>
+<div id="resultado"></div>
+
 <!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
@@ -262,10 +259,7 @@ function copiarYabrir(prompt) {
 
   navigator.clipboard.writeText(prompt).then(() => {
 
-    // Mostrar modal primero
     document.getElementById("modal").style.display = "flex";
-
-  
 
   }).catch(() => {
     alert("No se pudo copiar automáticamente. Copialo manualmente.");
