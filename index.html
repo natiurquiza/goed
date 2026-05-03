@@ -25,19 +25,20 @@ body {
   width: 820px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.08);
   text-align: center;
+  animation: fadeIn 0.6s ease;
 }
 
 h1 {
   font-size: 34px;
-  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .subtitle {
   color: #7c8a8a;
-  font-size: 14px;
   margin-bottom: 35px;
 }
 
+/* TARJETAS EJES */
 .cards {
   display: flex;
   gap: 20px;
@@ -50,11 +51,12 @@ h1 {
   border: 2px solid #4FD1C5;
   padding: 15px;
   cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.card img {
-  width: 100%;
-  border-radius: 15px;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .card.selected {
@@ -62,6 +64,7 @@ h1 {
   background: #fff0f6;
 }
 
+/* FORM */
 .form {
   display: flex;
   gap: 15px;
@@ -73,10 +76,16 @@ select {
   padding: 12px;
   border-radius: 12px;
   border: 2px solid #4FD1C5;
-  font-family: 'Poppins';
+  transition: 0.2s;
 }
 
-button {
+select:focus {
+  outline: none;
+  border-color: #ff4fa3;
+}
+
+/* BOTÓN BUSCAR */
+button.buscar {
   background: #ff4fa3;
   color: white;
   border: none;
@@ -85,10 +94,15 @@ button {
   border-radius: 16px;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+button.buscar:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(255,79,163,0.3);
 }
 
 /* RESULTADOS */
-
 .resultado-card {
   margin-top: 20px;
   padding: 20px;
@@ -96,44 +110,121 @@ button {
   border: 2px solid #4FD1C5;
   background: #f9ffff;
   text-align: left;
+  transition: 0.25s;
+  animation: fadeUp 0.4s ease;
+}
+
+.resultado-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .resultado-titulo {
-  font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
-}
-
-/* CONTENEDOR BOTONES */
-.botones {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+  font-size: 18px;
 }
 
 /* BOTONES */
+.botones {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .btn-proyecto {
   background: #4FD1C5;
   color: white;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.btn-proyecto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(79,209,197,0.4);
 }
 
 .btn-ia {
   border: 2px solid #4FD1C5;
   color: #4FD1C5;
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: 10px;
   font-weight: 500;
   cursor: pointer;
   background: white;
+  white-space: nowrap;
+  transition: 0.2s;
 }
 
 .btn-ia:hover {
   background: #4FD1C5;
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(79,209,197,0.4);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  width: 350px;
+  text-align: center;
+  animation: scaleIn 0.3s ease;
+}
+
+.modal h3 {
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background: #4FD1C5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(10px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+@keyframes scaleIn {
+  from {transform: scale(0.9); opacity:0;}
+  to {transform: scale(1); opacity:1;}
 }
 
 </style>
@@ -147,145 +238,100 @@ button {
 <p class="subtitle">Explorá proyectos de Educación Digital alineados al diseño curricular</p>
 
 <div class="cards">
-
-<div class="card" onclick="seleccionar(this,'alfabetizaciones')">
-  <img src="https://i.imgur.com/HCbcgiO.png">
-  <p>Alfabetizaciones múltiples</p>
-</div>
-
-<div class="card" onclick="seleccionar(this,'ciudadania')">
-  <img src="https://i.imgur.com/XtP23Pr.png">
-  <p>Ciudadanía digital</p>
-</div>
-
-<div class="card" onclick="seleccionar(this,'computacional')">
-  <img src="https://i.imgur.com/CiCnCgu.png">
-  <p>Pensamiento computacional</p>
-</div>
-
+<div class="card" onclick="seleccionar(this,'alfabetizaciones')">Alfabetizaciones</div>
+<div class="card" onclick="seleccionar(this,'ciudadania')">Ciudadanía</div>
+<div class="card" onclick="seleccionar(this,'computacional')">Computacional</div>
 </div>
 
 <div class="form">
-
 <select id="grado">
-  <option value="">Grado</option>
-  <option>1°</option>
-  <option>2°</option>
-  <option>3°</option>
-  <option>4°</option>
-  <option>5°</option>
-  <option>6°</option>
-  <option>7°</option>
+<option>1°</option><option>2°</option><option>3°</option>
 </select>
 
 <select id="modalidad">
-  <option value="">Modalidad</option>
-  <option>Común</option>
-  <option>Especial</option>
+<option>Común</option><option>Especial</option>
 </select>
 
 <select id="area">
-  <option value="">Área</option>
-  <option>Lengua</option>
-  <option>Matemáticas</option>
-  <option>Conocimiento del mundo</option>
-  <option>Tecnología</option>
-  <option>Inglés</option>
-  <option>Todas</option>
+<option>Lengua</option><option>Todas</option>
 </select>
-
 </div>
 
-<button onclick="buscar()">Buscar proyectos</button>
+<button class="buscar" onclick="buscar()">Buscar proyectos</button>
 
 <div id="resultado"></div>
 
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>🚀 Potenciar con IA</h3>
+    <p>
+      El prompt fue copiado.<br><br>
+      1. Se abrirá el GPT<br>
+      2. Pegá el prompt<br>
+      3. Descargá o copiá el proyecto y subilo
+    </p>
+    <button onclick="irGPT()">Continuar</button>
+  </div>
 </div>
 
 <script>
 
 let ejeSeleccionado = "";
 
-function seleccionar(elemento, eje) {
+function seleccionar(el, eje) {
   document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-  elemento.classList.add('selected');
+  el.classList.add('selected');
   ejeSeleccionado = eje;
 }
 
 function copiarYabrir(prompt) {
-
   navigator.clipboard.writeText(prompt);
+  document.getElementById("modal").style.display = "flex";
+}
 
-  alert("✅ Prompt copiado.\n\n1. Se abrirá el GPT\n2. Pegá el prompt\n3. Descargá o copiá el proyecto y subilo al GPT para potenciarlo.");
-
+function irGPT() {
   window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos", "_blank");
+  document.getElementById("modal").style.display = "none";
 }
 
 async function buscar() {
 
-  const grado = document.getElementById("grado").value;
-  const modalidad = document.getElementById("modalidad").value;
-  const area = document.getElementById("area").value;
-
   const url = "https://docs.google.com/spreadsheets/d/1HvV3mMCFMttcT2aP1TZbtjblY6CAhXa7Y_1nUO2Sekk/gviz/tq?tqx=out:json";
 
-  const response = await fetch(url);
-  const text = await response.text();
-
+  const res = await fetch(url);
+  const text = await res.text();
   const json = JSON.parse(text.substr(47).slice(0, -2));
   const rows = json.table.rows;
 
-  let resultadoHTML = "";
+  let html = "";
 
   rows.forEach(r => {
 
-    const eje = r.c[0]?.v?.toString().toLowerCase().trim();
-    const g = r.c[1]?.v?.toString().trim();
-    const m = r.c[2]?.v?.toString().trim();
-    const a = r.c[3]?.v?.toString().trim();
     const titulo = r.c[4]?.v;
     const link = r.c[5]?.v;
 
-    if (
-      eje && eje.includes(ejeSeleccionado) &&
-      g === grado &&
-      m === modalidad &&
-      (a === area || area === "Todas")
-    ) {
+    const prompt = `Adaptá este proyecto: ${titulo}`;
 
-      const prompt = 
-`Adaptá el siguiente proyecto educativo:
+    html += `
+      <div class="resultado-card">
+        <div class="resultado-titulo">${titulo}</div>
 
-Proyecto: ${titulo}
-Grado: ${g}
-Modalidad: ${m}
-Área: ${a}
+        <div class="botones">
+          <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
 
-Proponé:
-- objetivos claros
-- actividades paso a paso
-- integración de tecnología
-- estrategias inclusivas
-- evaluación`;
-
-      resultadoHTML += `
-        <div class="resultado-card">
-          <div class="resultado-titulo">${titulo}</div>
-
-          <div class="botones">
-            <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
-
-            <button class="btn-ia" onclick="copiarYabrir(\`${prompt}\`)">
-              Potenciar con IA
-            </button>
-          </div>
-
+          <button class="btn-ia" onclick="copiarYabrir(\`${prompt}\`)">
+            Potenciar con IA
+          </button>
         </div>
-      `;
-    }
+
+      </div>
+    `;
   });
 
-  document.getElementById("resultado").innerHTML = resultadoHTML;
+  document.getElementById("resultado").innerHTML = html;
 }
 
 </script>
