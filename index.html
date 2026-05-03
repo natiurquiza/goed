@@ -130,6 +130,7 @@ button {
   border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .btn-ia:hover {
@@ -214,6 +215,14 @@ function seleccionar(elemento, eje) {
   ejeSeleccionado = eje;
 }
 
+function copiarYabrir(prompt) {
+  navigator.clipboard.writeText(prompt);
+
+  alert("✅ Prompt copiado. Se abrirá el GPT.\n\nPegalo directamente.");
+
+  window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos", "_blank");
+}
+
 async function buscar() {
 
   const grado = document.getElementById("grado").value;
@@ -253,14 +262,20 @@ async function buscar() {
     ) {
       contador++;
 
-      const prompt = encodeURIComponent(
-        `Adaptá el siguiente proyecto educativo:\n\n` +
-        `Proyecto: ${titulo}\n` +
-        `Grado: ${g}\n` +
-        `Modalidad: ${m}\n` +
-        `Área: ${a}\n\n` +
-        `Proponé una versión adaptada con objetivos, actividades, uso de tecnología y estrategias inclusivas.`
-      );
+      const prompt = 
+`Adaptá el siguiente proyecto educativo:
+
+Proyecto: ${titulo}
+Grado: ${g}
+Modalidad: ${m}
+Área: ${a}
+
+Proponé:
+- objetivos claros
+- actividades paso a paso
+- integración de tecnología
+- estrategias inclusivas
+- evaluación`;
 
       resultadoHTML += `
         <div class="resultado-card">
@@ -270,10 +285,9 @@ async function buscar() {
             Ver proyecto
           </a>
 
-          <a class="btn-ia" target="_blank"
-             href="https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos">
-             Potenciar con IA
-          </a>
+          <button class="btn-ia" onclick="copiarYabrir(\`${prompt}\`)">
+            Potenciar con IA
+          </button>
         </div>
       `;
     }
