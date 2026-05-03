@@ -250,10 +250,7 @@ function copiarYabrir(prompt) {
     // Mostrar modal primero
     document.getElementById("modal").style.display = "flex";
 
-    // Abrir GPT después de un pequeño delay (mejora UX)
-    setTimeout(() => {
-      window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos", "_blank");
-    }, 600);
+  
 
   }).catch(() => {
     alert("No se pudo copiar automáticamente. Copialo manualmente.");
