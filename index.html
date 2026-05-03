@@ -222,7 +222,7 @@ select {
 <!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
-    <h3>🚀 Potenciar con IA</h3>
+    <h3>Potenciar con IA</h3>
     <p>
       El prompt fue copiado.<br><br>
       1. Se abrirá el GPT<br>
@@ -244,8 +244,21 @@ function seleccionar(el, eje) {
 }
 
 function copiarYabrir(prompt) {
-  navigator.clipboard.writeText(prompt);
-  document.getElementById("modal").style.display = "flex";
+
+  navigator.clipboard.writeText(prompt).then(() => {
+
+    // Mostrar modal primero
+    document.getElementById("modal").style.display = "flex";
+
+    // Abrir GPT después de un pequeño delay (mejora UX)
+    setTimeout(() => {
+      window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos", "_blank");
+    }, 600);
+
+  }).catch(() => {
+    alert("No se pudo copiar automáticamente. Copialo manualmente.");
+  });
+
 }
 
 function irGPT() {
