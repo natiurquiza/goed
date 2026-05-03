@@ -191,15 +191,15 @@ async function buscar() {
 
   rows.forEach(r => {
 
-    const eje = r.c[0]?.v;
-    const g = r.c[1]?.v;
-    const m = r.c[2]?.v;
-    const a = r.c[3]?.v;
+    const eje = r.c[0]?.v?.toString().toLowerCase().trim();
+    const g = r.c[1]?.v?.toString().trim();
+    const m = r.c[2]?.v?.toString().trim();
+    const a = r.c[3]?.v?.toString().trim();
     const titulo = r.c[4]?.v;
     const link = r.c[5]?.v;
 
     if (
-      eje === ejeSeleccionado &&
+      eje && eje.includes(ejeSeleccionado) &&
       g === grado &&
       m === modalidad &&
       (a === area || area === "Todas")
