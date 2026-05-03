@@ -50,7 +50,6 @@ h1 {
   border: 2px solid #4FD1C5;
   padding: 15px;
   cursor: pointer;
-  transition: 0.25s;
 }
 
 .card img {
@@ -89,11 +88,6 @@ button {
 }
 
 /* RESULTADOS */
-#contador {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #7c8a8a;
-}
 
 .resultado-card {
   margin-top: 20px;
@@ -110,27 +104,31 @@ button {
   margin-bottom: 12px;
 }
 
+/* CONTENEDOR BOTONES */
+.botones {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 /* BOTONES */
 .btn-proyecto {
-  display: inline-block;
   background: #4FD1C5;
   color: white;
   padding: 10px 16px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
-  margin-right: 10px;
 }
 
 .btn-ia {
-  display: inline-block;
   border: 2px solid #4FD1C5;
   color: #4FD1C5;
   padding: 10px 16px;
   border-radius: 10px;
-  text-decoration: none;
   font-weight: 500;
   cursor: pointer;
+  background: white;
 }
 
 .btn-ia:hover {
@@ -200,7 +198,6 @@ button {
 
 <button onclick="buscar()">Buscar proyectos</button>
 
-<div id="contador"></div>
 <div id="resultado"></div>
 
 </div>
@@ -216,9 +213,10 @@ function seleccionar(elemento, eje) {
 }
 
 function copiarYabrir(prompt) {
+
   navigator.clipboard.writeText(prompt);
 
-  alert("✅ Prompt copiado. Se abrirá el GPT.\n\nPegalo directamente.");
+  alert("✅ Prompt copiado.\n\n1. Se abrirá el GPT\n2. Pegá el prompt\n3. Descargá o copiá el proyecto y subilo al GPT para potenciarlo.");
 
   window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos", "_blank");
 }
@@ -229,11 +227,6 @@ async function buscar() {
   const modalidad = document.getElementById("modalidad").value;
   const area = document.getElementById("area").value;
 
-  if (!ejeSeleccionado) {
-    alert("Seleccioná un eje");
-    return;
-  }
-
   const url = "https://docs.google.com/spreadsheets/d/1HvV3mMCFMttcT2aP1TZbtjblY6CAhXa7Y_1nUO2Sekk/gviz/tq?tqx=out:json";
 
   const response = await fetch(url);
@@ -243,7 +236,6 @@ async function buscar() {
   const rows = json.table.rows;
 
   let resultadoHTML = "";
-  let contador = 0;
 
   rows.forEach(r => {
 
@@ -260,7 +252,6 @@ async function buscar() {
       m === modalidad &&
       (a === area || area === "Todas")
     ) {
-      contador++;
 
       const prompt = 
 `Adaptá el siguiente proyecto educativo:
@@ -281,24 +272,18 @@ Proponé:
         <div class="resultado-card">
           <div class="resultado-titulo">${titulo}</div>
 
-          <a class="btn-proyecto" href="${link}" target="_blank">
-            Ver proyecto
-          </a>
+          <div class="botones">
+            <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
 
-          <button class="btn-ia" onclick="copiarYabrir(\`${prompt}\`)">
-            Potenciar con IA
-          </button>
+            <button class="btn-ia" onclick="copiarYabrir(\`${prompt}\`)">
+              Potenciar con IA
+            </button>
+          </div>
+
         </div>
       `;
     }
   });
-
-  if (contador === 0) {
-    document.getElementById("contador").innerText = "";
-    resultadoHTML = "No se encontraron proyectos.";
-  } else {
-    document.getElementById("contador").innerText = contador + " proyecto(s) encontrados";
-  }
 
   document.getElementById("resultado").innerHTML = resultadoHTML;
 }
