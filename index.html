@@ -38,6 +38,7 @@ h1 {
   margin-bottom: 35px;
 }
 
+/* TARJETAS EJES */
 .cards {
   display: flex;
   gap: 20px;
@@ -63,6 +64,7 @@ h1 {
   background: #fff0f6;
 }
 
+/* FORMULARIO */
 .form {
   display: flex;
   gap: 15px;
@@ -77,6 +79,7 @@ select {
   font-family: 'Poppins';
 }
 
+/* BOTÓN */
 button {
   background: #ff4fa3;
   color: white;
@@ -86,10 +89,43 @@ button {
   border-radius: 16px;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-#resultado {
+button:hover {
+  transform: scale(1.02);
+}
+
+/* RESULTADOS */
+#contador {
   margin-top: 20px;
+  font-size: 14px;
+  color: #7c8a8a;
+}
+
+.resultado-card {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.resultado-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.resultado-card a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #ff4fa3;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.resultado-card a:hover {
+  text-decoration: underline;
 }
 
 </style>
@@ -154,6 +190,7 @@ button {
 
 <button onclick="buscar()">Buscar proyectos</button>
 
+<div id="contador"></div>
 <div id="resultado"></div>
 
 </div>
@@ -188,6 +225,7 @@ async function buscar() {
   const rows = json.table.rows;
 
   let resultadoHTML = "";
+  let contador = 0;
 
   rows.forEach(r => {
 
@@ -204,8 +242,10 @@ async function buscar() {
       m === modalidad &&
       (a === area || area === "Todas")
     ) {
+      contador++;
+
       resultadoHTML += `
-        <div style="margin-bottom:15px;">
+        <div class="resultado-card">
           <p><strong>${titulo}</strong></p>
           <a href="${link}" target="_blank">Ver proyecto</a>
         </div>
@@ -213,8 +253,11 @@ async function buscar() {
     }
   });
 
-  if (resultadoHTML === "") {
+  if (contador === 0) {
+    document.getElementById("contador").innerText = "";
     resultadoHTML = "No se encontraron proyectos.";
+  } else {
+    document.getElementById("contador").innerText = contador + " proyecto(s) encontrados";
   }
 
   document.getElementById("resultado").innerHTML = resultadoHTML;
