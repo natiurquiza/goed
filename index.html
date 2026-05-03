@@ -14,7 +14,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -38,7 +38,6 @@ h1 {
   margin-bottom: 35px;
 }
 
-/* TARJETAS EJES */
 .cards {
   display: flex;
   gap: 20px;
@@ -64,7 +63,6 @@ h1 {
   background: #fff0f6;
 }
 
-/* FORMULARIO */
 .form {
   display: flex;
   gap: 15px;
@@ -79,7 +77,6 @@ select {
   font-family: 'Poppins';
 }
 
-/* BOTÓN */
 button {
   background: #ff4fa3;
   color: white;
@@ -89,43 +86,50 @@ button {
   border-radius: 16px;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-button:hover {
-  transform: scale(1.02);
-}
-
-/* RESULTADOS */
 #contador {
   margin-top: 20px;
   font-size: 14px;
   color: #7c8a8a;
 }
 
+/* TARJETAS RESULTADOS */
 .resultado-card {
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 14px;
-  border: 1px solid #e0e0e0;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 18px;
+  border: 2px solid #4FD1C5;
+  background: #f9ffff;
   text-align: left;
   transition: 0.2s;
 }
 
 .resultado-card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 
-.resultado-card a {
+.resultado-titulo {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* BOTÓN CELESTE */
+.btn-proyecto {
   display: inline-block;
-  margin-top: 8px;
-  color: #ff4fa3;
-  font-weight: 500;
+  background: #4FD1C5;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
   text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-.resultado-card a:hover {
-  text-decoration: underline;
+.btn-proyecto:hover {
+  background: #38b2ac;
 }
 
 </style>
@@ -246,8 +250,8 @@ async function buscar() {
 
       resultadoHTML += `
         <div class="resultado-card">
-          <p><strong>${titulo}</strong></p>
-          <a href="${link}" target="_blank">Ver proyecto</a>
+          <div class="resultado-titulo">${titulo}</div>
+          <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
         </div>
       `;
     }
