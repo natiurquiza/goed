@@ -88,13 +88,13 @@ button {
   cursor: pointer;
 }
 
+/* RESULTADOS */
 #contador {
   margin-top: 20px;
   font-size: 14px;
   color: #7c8a8a;
 }
 
-/* TARJETAS RESULTADOS */
 .resultado-card {
   margin-top: 20px;
   padding: 20px;
@@ -102,12 +102,6 @@ button {
   border: 2px solid #4FD1C5;
   background: #f9ffff;
   text-align: left;
-  transition: 0.2s;
-}
-
-.resultado-card:hover {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
 }
 
 .resultado-titulo {
@@ -116,7 +110,7 @@ button {
   margin-bottom: 12px;
 }
 
-/* BOTÓN CELESTE */
+/* BOTONES */
 .btn-proyecto {
   display: inline-block;
   background: #4FD1C5;
@@ -125,11 +119,22 @@ button {
   border-radius: 10px;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.2s;
+  margin-right: 10px;
 }
 
-.btn-proyecto:hover {
-  background: #38b2ac;
+.btn-ia {
+  display: inline-block;
+  border: 2px solid #4FD1C5;
+  color: #4FD1C5;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn-ia:hover {
+  background: #4FD1C5;
+  color: white;
 }
 
 </style>
@@ -252,6 +257,9 @@ async function buscar() {
         <div class="resultado-card">
           <div class="resultado-titulo">${titulo}</div>
           <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
+          <a class="btn-ia" href="https://chat.openai.com" target="_blank">
+            Potenciar con IA
+          </a>
         </div>
       `;
     }
