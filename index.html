@@ -209,7 +209,17 @@ function seleccionar(elemento, eje) {
   ejeSeleccionado = eje;
 }
 
-function buscar() {
+<script>
+
+let ejeSeleccionado = "";
+
+function seleccionar(elemento, eje) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  elemento.classList.add('selected');
+  ejeSeleccionado = eje;
+}
+
+async function buscar() {
 
   const grado = document.getElementById("grado").value;
   const modalidad = document.getElementById("modalidad").value;
@@ -219,6 +229,50 @@ function buscar() {
     alert("Seleccioná un eje");
     return;
   }
+
+  const url = "https://docs.google.com/spreadsheets/d/1HvV3mMCFMttcT2aP1TZbtjblY6CAhXa7Y_1nUO2Sekk//gviz/tq?tqx=out:json
+";
+
+  const response = await fetch(url);
+  const text = await response.text();
+
+  const json = JSON.parse(text.substr(47).slice(0, -2));
+  const rows = json.table.rows;
+
+  let resultadoHTML = "";
+
+  rows.forEach(r => {
+
+    const eje = r.c[0]?.v;
+    const g = r.c[1]?.v;
+    const m = r.c[2]?.v;
+    const a = r.c[3]?.v;
+    const titulo = r.c[4]?.v;
+    const link = r.c[5]?.v;
+
+    if (
+      eje === ejeSeleccionado &&
+      g === grado &&
+      m === modalidad &&
+      (a === area || area === "Todas")
+    ) {
+      resultadoHTML += `
+        <div>
+          <p><strong>${titulo}</strong></p>
+          <a href="${link}" target="_blank">Ver proyecto</a>
+        </div>
+      `;
+    }
+  });
+
+  if (resultadoHTML === "") {
+    resultadoHTML = "No se encontraron proyectos.";
+  }
+
+  document.getElementById("resultado").innerHTML = resultadoHTML;
+}
+
+</script>
 
   document.getElementById("resultado").innerText =
     "Buscando: " + ejeSeleccionado +
