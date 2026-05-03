@@ -253,12 +253,26 @@ async function buscar() {
     ) {
       contador++;
 
+      const prompt = encodeURIComponent(
+        `Adaptá el siguiente proyecto educativo:\n\n` +
+        `Proyecto: ${titulo}\n` +
+        `Grado: ${g}\n` +
+        `Modalidad: ${m}\n` +
+        `Área: ${a}\n\n` +
+        `Proponé una versión adaptada con objetivos, actividades, uso de tecnología y estrategias inclusivas.`
+      );
+
       resultadoHTML += `
         <div class="resultado-card">
           <div class="resultado-titulo">${titulo}</div>
-          <a class="btn-proyecto" href="${link}" target="_blank">Ver proyecto</a>
-          <a class="btn-ia" href="https://chat.openai.com" target="_blank">
-            Potenciar con IA
+
+          <a class="btn-proyecto" href="${link}" target="_blank">
+            Ver proyecto
+          </a>
+
+          <a class="btn-ia" target="_blank"
+             href="https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos">
+             Potenciar con IA
           </a>
         </div>
       `;
