@@ -294,10 +294,9 @@ async function buscar() {
 
 const coincide =
   eje && normalizar(eje).includes(normalizar(ejeSeleccionado)) &&
-    g === gradoSeleccionado &&
-    m === modalidadSeleccionada &&
-    (a === areaSeleccionada || areaSeleccionada === "Todas");
-
+  normalizar(g) === normalizar(gradoSeleccionado) &&
+  normalizar(m) === normalizar(modalidadSeleccionada) &&
+  (normalizar(a) === normalizar(areaSeleccionada) || areaSeleccionada === "Todas");
   if (!coincide) return;
 
   const titulo = r.c[4]?.v;
