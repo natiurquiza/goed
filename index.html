@@ -227,7 +227,6 @@ select {
 
 </div>
 
-<!-- 🔥 SOLO ESTO AGREGADO -->
 <button class="buscar" onclick="buscar()">Buscar proyectos</button>
 <div id="resultado"></div>
 
@@ -256,24 +255,15 @@ function seleccionar(el, eje) {
 }
 
 function copiarYabrir(prompt) {
-
   navigator.clipboard.writeText(prompt).then(() => {
-
     document.getElementById("modal").style.display = "flex";
-
   }).catch(() => {
-    alert("No se pudo copiar automáticamente. Copialo manualmente.");
+    alert("No se pudo copiar automáticamente.");
   });
-
 }
 
 function irGPT() {
-
-  window.open(
-    "https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos",
-    "_blank"
-  );
-
+  window.open("https://chatgpt.com/g/g-69f7660a30988191bcb0501d3a516bd8-inspirated-adaptador-de-proyectos","_blank");
   document.getElementById("modal").style.display = "none";
 }
 
@@ -293,37 +283,20 @@ async function buscar() {
     const titulo = r.c[4]?.v;
     const link = r.c[5]?.v;
 
+    // 🔥 ESTO ARREGLA TODO
+    const g = r.c[1]?.v;
+    const m = r.c[2]?.v;
+    const a = r.c[3]?.v;
+
     const prompt = `
 Sos un especialista en educación digital del Ministerio de Educación de CABA.
 
-Necesito que adaptes el siguiente proyecto pedagógico:
+Proyecto: ${titulo}
+Grado: ${g}
+Modalidad: ${m}
+Área: ${a}
 
-📘 Proyecto: ${titulo}
-📍 Grado: ${g}
-🏫 Modalidad: ${m}
-📚 Área: ${a}
-
-🎯 Tu tarea:
-Rediseñar el proyecto para que sea aplicable en el aula, incorporando el Plan de Bialfabetización Digital.
-
-📌 Incluir:
-
-1. Objetivos claros de aprendizaje
-2. Secuencia de actividades paso a paso
-3. Integración de tecnología con sentido pedagógico
-4. Estrategias de inclusión (especialmente si es modalidad especial)
-5. Propuestas de evaluación formativa
-
-📌 Asegurate de integrar al menos uno de estos ejes:
-- Alfabetizaciones múltiples
-- Ciudadanía digital
-- Pensamiento computacional
-
-📌 Importante:
-- Usar lenguaje claro y docente
-- Evitar generalidades
-- Proponer actividades concretas listas para implementar
-
+Adaptalo con objetivos, actividades, tecnología e inclusión.
 `;
 
     html += `
