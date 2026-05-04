@@ -289,8 +289,11 @@ async function buscar() {
   const modalidadSeleccionada = document.getElementById("modalidad").value;
   const areaSeleccionada = document.getElementById("area").value;
 
-  const coincide =
-    eje && eje.includes(ejeSeleccionado) &&
+  const normalizar = (texto) =>
+  texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+const coincide =
+  eje && normalizar(eje).includes(normalizar(ejeSeleccionado)) &&
     g === gradoSeleccionado &&
     m === modalidadSeleccionada &&
     (a === areaSeleccionada || areaSeleccionada === "Todas");
